@@ -1,14 +1,25 @@
-const required = ["NEXT_PUBLIC_SUPABASE_URL", "NEXT_PUBLIC_SUPABASE_ANON_KEY"] as const;
+export function getPublicSupabaseEnv() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-for (const key of required) {
-  if (!process.env[key]) {
-    throw new Error(`Missing required env var: ${key}`);
+  if (!supabaseUrl) {
+    throw new Error("Missing required env var: NEXT_PUBLIC_SUPABASE_URL");
   }
+  if (!supabaseAnonKey) {
+    throw new Error("Missing required env var: NEXT_PUBLIC_SUPABASE_ANON_KEY");
+  }
+
+  return {
+    supabaseUrl,
+    supabaseAnonKey,
+    siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
+  };
 }
 
-export const env = {
-  supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  supabaseAnonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  supabaseServiceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
-};
+export function getServiceRoleKey() {
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!serviceRoleKey) {
+    throw new Error("Missing required env var: SUPABASE_SERVICE_ROLE_KEY");
+  }
+  return serviceRoleKey;
+}

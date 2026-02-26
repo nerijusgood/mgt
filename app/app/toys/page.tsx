@@ -1,15 +1,6 @@
 import { getCurrentUserProfile, getParentSnapshot, getToysWithAvailability } from "@/lib/data";
 import { ToyCard } from "@/components/app/toy-card";
-import { Select } from "@/components/ui/select";
-
-const ageFilters = [
-  ["all", "All ages"],
-  ["0-12", "0-12 months"],
-  ["12-24", "12-24 months"],
-  ["24-36", "24-36 months"],
-  ["36-48", "36-48 months"],
-  ["48-60", "48-60 months"]
-] as const;
+import { AgeFilter } from "@/components/app/age-filter";
 
 export default async function ParentToysPage({ searchParams }: { searchParams: Promise<{ age?: string }> }) {
   const params = await searchParams;
@@ -23,15 +14,7 @@ export default async function ParentToysPage({ searchParams }: { searchParams: P
     <div className="space-y-6">
       <div className="flex items-end justify-between gap-3">
         <h2 className="text-2xl font-semibold">Reserve toys</h2>
-        <form>
-          <Select name="age" defaultValue={selectedAge} onChange={(e) => e.currentTarget.form?.submit()}>
-            {ageFilters.map(([value, label]) => (
-              <option key={value} value={value}>
-                {label}
-              </option>
-            ))}
-          </Select>
-        </form>
+        <AgeFilter value={selectedAge} />
       </div>
 
       <p className="text-sm text-muted-foreground">Available points: {pointsBalance}</p>
