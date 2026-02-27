@@ -2,10 +2,37 @@ import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import { getPublicSupabaseEnv } from "@/lib/env";
 
+const DEMO_COOKIE_NAME = "mg_demo_access";
+
 export async function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+  const search = request.nextUrl.search;
+  const isSystemPath =
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/favicon.ico") ||
+    pathname.startsWith("/robots.txt") ||
+    pathname.startsWith("/sitemap.xml");
+  const isDemoGateBypass = pathname === "/demo-login" || pathname.startsWith("/api/demo-access");
+  const demoPassword = process.env.DEMO_ACCESS_PASSWORD;
+
+  if (!isSystemPath && !isDemoGateBypass && demoPassword) {
+    const demoCookie = request.cookies.get(DEMO_COOKIE_NAME)?.value;
+    if (demoCookie !== demoPassword) {
+      const url = new URL("/demo-login", request.url);
+      url.searchParams.set("next", `${pathname}${search}`);
+      return NextResponse.redirect(url);
+    }
+  }
+
+  const isAppRoute = pathname.startsWith("/app");
+  const isAdminRoute = pathname.startsWith("/admin");
+
+  if (!isAppRoute && !isAdminRoute) {
+    return NextResponse.next({ request });
+  }
+
   let response = NextResponse.next({ request });
   const env = getPublicSupabaseEnv();
-
   const supabase = createServerClient(env.supabaseUrl, env.supabaseAnonKey, {
     cookies: {
       getAll() {
@@ -22,10 +49,6 @@ export async function middleware(request: NextRequest) {
   const {
     data: { user }
   } = await supabase.auth.getUser();
-
-  const pathname = request.nextUrl.pathname;
-  const isAppRoute = pathname.startsWith("/app");
-  const isAdminRoute = pathname.startsWith("/admin");
 
   if (!user && (isAppRoute || isAdminRoute)) {
     return NextResponse.redirect(new URL("/auth/login", request.url));
@@ -49,5 +72,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/app/:path*", "/admin/:path*"]
+  matcher: ["/((?!_next/static|_next/image).*)"]
 };

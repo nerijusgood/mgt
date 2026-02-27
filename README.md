@@ -79,6 +79,7 @@ NEXT_PUBLIC_SUPABASE_URL=...
 NEXT_PUBLIC_SUPABASE_ANON_KEY=...
 SUPABASE_SERVICE_ROLE_KEY=... # optional in this POC, kept for future Stripe/admin extensions
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
+DEMO_ACCESS_PASSWORD=... # optional; when set, site is password-gated at /demo-login
 ```
 
 ## Local setup
@@ -118,5 +119,8 @@ update public.profiles set role = 'admin' where id = '<auth_user_uuid>';
 - Middleware enforces route-level role access:
   - parents -> `/app/*`
   - admins -> `/admin/*`
+- Optional demo gate:
+  - set `DEMO_ACCESS_PASSWORD` to protect the whole site with app-level password access
+  - users will be redirected to `/demo-login` until correct password is entered
 - RLS policies enforce data-level access.
 - This POC intentionally uses simulated renewals instead of Stripe webhooks for faster shipping.
