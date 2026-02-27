@@ -1,4 +1,4 @@
-select p.id, u.email, p.full_name, p.role
+select u.email, p.role
 from public.profiles p
-left join auth.users u on u.id = p.id
-where p.role = 'admin';
+join auth.users u on u.id = p.id
+where u.email = 'gudas@gudas.com';

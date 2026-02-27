@@ -4,6 +4,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
@@ -84,45 +85,75 @@ export function AdminToysManager({ toys }: { toys: Toy[] }) {
 
   return (
     <div className="space-y-6">
-      <div className="grid gap-3 rounded-xl border bg-white p-4 md:grid-cols-2">
-        <Input placeholder="Toy name" value={form.name} onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))} />
-        <Input
-          placeholder="Image URL"
-          value={form.image_url}
-          onChange={(e) => setForm((p) => ({ ...p, image_url: e.target.value }))}
-        />
-        <div className="md:col-span-2">
+      <div className="surface grid gap-4 p-6 md:grid-cols-2">
+        <div className="space-y-2">
+          <Label htmlFor="toy-name">Toy name</Label>
+          <Input id="toy-name" placeholder="Toy name" value={form.name} onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))} />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="toy-image">Image URL</Label>
+          <Input
+            id="toy-image"
+            placeholder="https://..."
+            value={form.image_url}
+            onChange={(e) => setForm((p) => ({ ...p, image_url: e.target.value }))}
+          />
+        </div>
+        <div className="space-y-2 md:col-span-2">
+          <Label htmlFor="toy-description">Description</Label>
           <Textarea
+            id="toy-description"
             placeholder="Description"
             value={form.description}
             onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))}
           />
         </div>
-        <Input
-          placeholder="Age min months"
-          type="number"
-          value={form.age_min_months}
-          onChange={(e) => setForm((p) => ({ ...p, age_min_months: e.target.value }))}
-        />
-        <Input
-          placeholder="Age max months"
-          type="number"
-          value={form.age_max_months}
-          onChange={(e) => setForm((p) => ({ ...p, age_max_months: e.target.value }))}
-        />
-        <Input
-          placeholder="Points cost"
-          type="number"
-          value={form.points_cost}
-          onChange={(e) => setForm((p) => ({ ...p, points_cost: e.target.value }))}
-        />
-        <Input placeholder="Tags comma-separated" value={form.tags} onChange={(e) => setForm((p) => ({ ...p, tags: e.target.value }))} />
-        <div className="md:col-span-2 flex gap-2">
+        <div className="space-y-2">
+          <Label htmlFor="toy-age-min">Age min months</Label>
+          <Input
+            id="toy-age-min"
+            placeholder="0"
+            type="number"
+            value={form.age_min_months}
+            onChange={(e) => setForm((p) => ({ ...p, age_min_months: e.target.value }))}
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="toy-age-max">Age max months</Label>
+          <Input
+            id="toy-age-max"
+            placeholder="12"
+            type="number"
+            value={form.age_max_months}
+            onChange={(e) => setForm((p) => ({ ...p, age_max_months: e.target.value }))}
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="toy-points">Points cost</Label>
+          <Input
+            id="toy-points"
+            placeholder="20"
+            type="number"
+            value={form.points_cost}
+            onChange={(e) => setForm((p) => ({ ...p, points_cost: e.target.value }))}
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="toy-tags">Tags</Label>
+          <Input id="toy-tags" placeholder="tags comma-separated" value={form.tags} onChange={(e) => setForm((p) => ({ ...p, tags: e.target.value }))} />
+        </div>
+        <div className="flex gap-2 md:col-span-2">
           <Button onClick={submit} disabled={pending}>
             {pending ? "Saving..." : editingId ? "Update toy" : "Create toy"}
           </Button>
           {editingId && (
-            <Button variant="outline" onClick={() => { setEditingId(null); setForm(empty); }}>
+            <Button
+              variant="outline"
+              onClick={() => {
+                setEditingId(null);
+                setForm(empty);
+              }}
+            >
               Cancel
             </Button>
           )}
@@ -141,7 +172,7 @@ export function AdminToysManager({ toys }: { toys: Toy[] }) {
         <TableBody>
           {toys.map((toy) => (
             <TableRow key={toy.id}>
-              <TableCell>{toy.name}</TableCell>
+              <TableCell className="font-medium">{toy.name}</TableCell>
               <TableCell>
                 {toy.age_min_months}-{toy.age_max_months}
               </TableCell>
@@ -150,7 +181,7 @@ export function AdminToysManager({ toys }: { toys: Toy[] }) {
                 <Button variant="outline" onClick={() => startEdit(toy)}>
                   Edit
                 </Button>
-                <Button variant="outline" onClick={() => remove(toy.id)} disabled={pending}>
+                <Button variant="destructive" onClick={() => remove(toy.id)} disabled={pending}>
                   Delete
                 </Button>
               </TableCell>

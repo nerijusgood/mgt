@@ -12,10 +12,17 @@ type Row = {
   created_at: string;
   due_date: string;
   user_id: string;
-  toy_units: { toys: { name: string } | null } | null;
+  toy_units: { toys: { name: string } | { name: string }[] | null } | { toys: { name: string } | { name: string }[] | null }[] | null;
 };
 
 const statuses = ["reserved", "shipped", "active", "return_requested", "returned", "lost"];
+
+function toyName(toyUnits: Row["toy_units"]) {
+  const unit = Array.isArray(toyUnits) ? toyUnits[0] : toyUnits;
+  const toys = unit?.toys;
+  if (Array.isArray(toys)) return toys[0]?.name ?? "Unknown";
+  return toys?.name ?? "Unknown";
+}
 
 export function AdminRentalsTable({ rows }: { rows: Row[] }) {
   const [statusById, setStatusById] = useState<Record<string, string>>({});
@@ -55,11 +62,11 @@ export function AdminRentalsTable({ rows }: { rows: Row[] }) {
       <TableBody>
         {rows.map((row) => (
           <TableRow key={row.id}>
-            <TableCell>{row.id.slice(0, 8)}</TableCell>
-            <TableCell>{row.toy_units?.toys?.name ?? "Unknown"}</TableCell>
+            <TableCell className="font-medium">{row.id.slice(0, 8)}</TableCell>
+            <TableCell>{toyName(row.toy_units)}</TableCell>
             <TableCell>{row.user_id.slice(0, 8)}</TableCell>
             <TableCell>
-              <Select value={statusById[row.id] ?? row.status} onChange={(e) => setStatusById((p) => ({ ...p, [row.id]: e.target.value }))}>
+              <Select aria-label={`Status for rental ${row.id.slice(0, 8)}`} value={statusById[row.id] ?? row.status} onChange={(e) => setStatusById((p) => ({ ...p, [row.id]: e.target.value }))}>
                 {statuses.map((status) => (
                   <option key={status} value={status}>
                     {status}

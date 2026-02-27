@@ -10,13 +10,13 @@ export default async function ParentRentalsPage() {
   const history = rentals.filter((r) => ["returned", "lost"].includes(r.status));
 
   return (
-    <div className="space-y-8">
-      <section className="space-y-3">
-        <h2 className="text-2xl font-semibold">Active rentals</h2>
+    <div className="section-stack">
+      <section className="space-y-4">
+        <h3>Active rentals</h3>
         <RentalList rentals={active} />
       </section>
-      <section className="space-y-3">
-        <h2 className="text-2xl font-semibold">Rental history</h2>
+      <section className="space-y-4">
+        <h3>Rental history</h3>
         <RentalList rentals={history} />
       </section>
     </div>

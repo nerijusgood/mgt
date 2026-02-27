@@ -15,14 +15,14 @@ export default async function DashboardPage() {
   const activeRentals = rentals.filter((r) => ["reserved", "shipped", "active", "return_requested"].includes(r.status));
 
   return (
-    <div className="space-y-6">
+    <div className="section-stack">
       <div className="grid gap-4 md:grid-cols-3">
         <Card>
           <CardHeader>
             <CardTitle>Points balance</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold">{pointsBalance}</p>
+            <p className="text-4xl font-semibold">{pointsBalance}</p>
           </CardContent>
         </Card>
         <Card>
@@ -30,7 +30,7 @@ export default async function DashboardPage() {
             <CardTitle>Active rentals</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold">{activeRentals.length}</p>
+            <p className="text-4xl font-semibold">{activeRentals.length}</p>
           </CardContent>
         </Card>
         <Card>
@@ -38,19 +38,19 @@ export default async function DashboardPage() {
             <CardTitle>Plan</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold capitalize">{subscription?.plan ?? "none"}</p>
+            <p className="text-4xl font-semibold capitalize">{subscription?.plan ?? "none"}</p>
           </CardContent>
         </Card>
       </div>
 
-      <section className="space-y-3">
-        <h2 className="text-xl font-semibold">Active rentals</h2>
+      <section className="space-y-4">
+        <h3>Active rentals</h3>
         <RentalList rentals={activeRentals} />
       </section>
 
-      <section className="space-y-3">
-        <h2 className="text-xl font-semibold">Recommended toys</h2>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <section className="space-y-4">
+        <h3>Recommended toys</h3>
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {toys.slice(0, 6).map((toy) => (
             <ToyCard key={toy.id} toy={toy} pointsBalance={pointsBalance} canReserve />
           ))}

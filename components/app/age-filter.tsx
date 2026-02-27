@@ -28,12 +28,17 @@ export function AgeFilter({ value }: { value: string }) {
   }
 
   return (
-    <Select value={value} onChange={(e) => onChange(e.target.value)}>
-      {ageFilters.map(([ageValue, label]) => (
-        <option key={ageValue} value={ageValue}>
-          {label}
-        </option>
-      ))}
-    </Select>
+    <div className="w-full max-w-[13rem]">
+      <label htmlFor="age-filter" className="mb-1 block text-xs font-medium uppercase tracking-wide text-muted-foreground">
+        Age range
+      </label>
+      <Select id="age-filter" aria-label="Filter toys by age range" value={value} onChange={(e) => onChange(e.target.value)}>
+        {ageFilters.map(([ageValue, label]) => (
+          <option key={ageValue} value={ageValue}>
+            {label}
+          </option>
+        ))}
+      </Select>
+    </div>
   );
 }

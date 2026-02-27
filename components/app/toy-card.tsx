@@ -40,13 +40,13 @@ export function ToyCard({ toy, pointsBalance = 0, canReserve = false }: Props) {
   }
 
   return (
-    <Card className="h-full">
+    <Card className="h-full overflow-hidden">
+      <div className="relative aspect-[4/3] w-full overflow-hidden border-b border-border">
+        <Image src={toy.image_url} alt={toy.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+      </div>
       <CardHeader>
-        <div className="relative mb-3 h-40 w-full overflow-hidden rounded-md">
-          <Image src={toy.image_url} alt={toy.name} fill className="object-cover" />
-        </div>
-        <CardTitle className="text-lg">{toy.name}</CardTitle>
-        <CardDescription>{toy.description}</CardDescription>
+        <CardTitle className="text-xl">{toy.name}</CardTitle>
+        <CardDescription className="line-clamp-3">{toy.description}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex flex-wrap gap-2">
@@ -64,7 +64,7 @@ export function ToyCard({ toy, pointsBalance = 0, canReserve = false }: Props) {
           ))}
         </div>
         {canReserve && (
-          <Button onClick={handleReserve} disabled={pending || insufficient || unavailable} className="w-full">
+          <Button onClick={handleReserve} disabled={pending || insufficient || unavailable} className="w-full" aria-label={`Reserve ${toy.name}`}>
             {insufficient ? "Not enough points" : unavailable ? "No units available" : pending ? "Reserving..." : "Reserve"}
           </Button>
         )}

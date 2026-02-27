@@ -13,10 +13,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: true });
     }
 
-    const update: { status: string; returned_at?: string | null } = { status: body.status };
-    if (body.status === "returned") {
-      update.returned_at = new Date().toISOString();
-    }
+    const update: { status: string } = { status: body.status };
 
     const { error } = await supabase.from("rentals").update(update).eq("id", body.rentalId);
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });

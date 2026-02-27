@@ -12,7 +12,7 @@ export default async function SubscriptionPage() {
       <CardHeader>
         <CardTitle>Subscription</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-2">
+      <CardContent className="space-y-3">
         <p>
           Plan: <span className="font-semibold capitalize">{subscription?.plan ?? "none"}</span>
         </p>
@@ -21,8 +21,7 @@ export default async function SubscriptionPage() {
         </p>
         <p>Monthly points: {subscription?.monthly_points ?? 0}</p>
         <p>
-          Renewal date:{" "}
-          {subscription?.renewal_date ? new Date(subscription.renewal_date).toLocaleDateString() : "Not set"}
+          Renewal date: {subscription?.renewal_date ? new Date(subscription.renewal_date).toLocaleDateString() : "Not set"}
         </p>
         <p className="text-sm text-muted-foreground">POC uses admin-triggered simulate renewal instead of full Stripe webhook wiring.</p>
       </CardContent>

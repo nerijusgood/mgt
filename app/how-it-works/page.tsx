@@ -10,9 +10,9 @@ const steps = [
 
 export default function HowItWorksPage() {
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-semibold">How it works</h1>
-      <div className="grid gap-4 md:grid-cols-2">
+    <div className="section-stack">
+      <h1>How it works</h1>
+      <div className="grid gap-5 md:grid-cols-2">
         {steps.map((step, index) => (
           <Card key={step}>
             <CardHeader>
@@ -21,7 +21,7 @@ export default function HowItWorksPage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground">Simple flow designed for busy parents and clean inventory operations.</p>
+              <p className="text-sm text-muted-foreground">Simple flow designed for busy parents and hygienic inventory operations.</p>
             </CardContent>
           </Card>
         ))}

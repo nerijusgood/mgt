@@ -25,10 +25,12 @@ export function PointsTable({ rows }: { rows: LedgerRow[] }) {
           <TableRow key={row.id}>
             <TableCell>{new Date(row.created_at).toLocaleString()}</TableCell>
             <TableCell>
-              <Badge variant="outline">{row.type}</Badge>
+              <Badge variant="outline" className="capitalize">
+                {row.type}
+              </Badge>
             </TableCell>
-            <TableCell>{row.reference_id ?? "-"}</TableCell>
-            <TableCell className="text-right">{row.amount}</TableCell>
+            <TableCell className="text-muted-foreground">{row.reference_id ?? "-"}</TableCell>
+            <TableCell className="text-right font-medium">{row.amount}</TableCell>
           </TableRow>
         ))}
       </TableBody>

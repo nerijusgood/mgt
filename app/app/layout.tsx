@@ -9,11 +9,11 @@ export default async function ParentLayout({ children }: { children: ReactNode }
   if (!user) redirect("/auth/login");
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
+    <div className="section-stack">
+      <div className="surface flex flex-col gap-4 p-6 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="text-sm text-muted-foreground">Parent portal</p>
-          <h1 className="text-2xl font-semibold">{profile?.full_name ?? "Parent"}</h1>
+          <h2 className="mt-1 text-2xl">{profile?.full_name ?? "Parent"}</h2>
         </div>
         <LogoutButton />
       </div>

@@ -1,6 +1,6 @@
-import type React from "react";
 "use client";
 
+import type React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -46,7 +46,7 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4 rounded-xl border bg-white p-6">
+    <form onSubmit={onSubmit} className="surface space-y-5 p-7" aria-label={`${mode} form`}>
       {mode === "register" && (
         <div className="space-y-2">
           <Label htmlFor="fullName">Full name</Label>
@@ -55,11 +55,11 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
       )}
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
-        <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <Input id="email" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
       </div>
       <div className="space-y-2">
         <Label htmlFor="password">Password</Label>
-        <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} />
+        <Input id="password" type="password" autoComplete={mode === "login" ? "current-password" : "new-password"} value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} />
       </div>
       <Button type="submit" className="w-full" disabled={pending}>
         {pending ? "Please wait..." : mode === "register" ? "Create account" : "Log in"}

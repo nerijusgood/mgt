@@ -5,8 +5,8 @@ export default async function AdminInventoryPage() {
   const rows = await getAdminInventory();
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-2xl font-semibold">Inventory units</h2>
+    <div className="section-stack">
+      <h3>Inventory units</h3>
       <AdminInventoryTable rows={rows} />
     </div>
   );

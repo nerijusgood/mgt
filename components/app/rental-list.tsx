@@ -12,8 +12,18 @@ type Rental = {
   created_at: string;
   due_date: string;
   returned_at: string | null;
-  toy_units: { toys: { name: string; points_cost: number } | null } | null;
+  toy_units:
+    | { toys: { name: string; points_cost: number } | { name: string; points_cost: number }[] | null }
+    | { toys: { name: string; points_cost: number } | { name: string; points_cost: number }[] | null }[]
+    | null;
 };
+
+function toyName(toyUnits: Rental["toy_units"]) {
+  const unit = Array.isArray(toyUnits) ? toyUnits[0] : toyUnits;
+  const toys = unit?.toys;
+  if (Array.isArray(toys)) return toys[0]?.name ?? "Unknown toy";
+  return toys?.name ?? "Unknown toy";
+}
 
 export function RentalList({ rentals }: { rentals: Rental[] }) {
   const [pendingId, setPendingId] = useState<string | null>(null);
@@ -34,7 +44,7 @@ export function RentalList({ rentals }: { rentals: Rental[] }) {
   }
 
   if (rentals.length === 0) {
-    return <p className="text-sm text-muted-foreground">No rentals yet.</p>;
+    return <p className="rounded-xl border border-border bg-card px-4 py-6 text-sm text-muted-foreground">No rentals yet.</p>;
   }
 
   return (
@@ -43,18 +53,21 @@ export function RentalList({ rentals }: { rentals: Rental[] }) {
         const canRequest = ["reserved", "shipped", "active"].includes(rental.status);
         return (
           <Card key={rental.id}>
-            <CardContent className="flex flex-col gap-3 pt-6 md:flex-row md:items-center md:justify-between">
+            <CardContent className="flex flex-col gap-4 pt-6 md:flex-row md:items-center md:justify-between">
               <div className="space-y-1">
-                <p className="font-medium">{rental.toy_units?.toys?.name ?? "Unknown toy"}</p>
+                <p className="text-base font-semibold">{toyName(rental.toy_units)}</p>
                 <p className="text-sm text-muted-foreground">Due: {new Date(rental.due_date).toLocaleDateString()}</p>
               </div>
               <div className="flex items-center gap-2">
-                <Badge variant="outline">{rental.status}</Badge>
+                <Badge variant="outline" className="capitalize">
+                  {rental.status.replace("_", " ")}
+                </Badge>
                 {canRequest && (
                   <Button
                     variant="outline"
                     onClick={() => requestReturn(rental.id)}
                     disabled={pendingId === rental.id}
+                    aria-label={`Request return for ${toyName(rental.toy_units)}`}
                   >
                     {pendingId === rental.id ? "Sending..." : "Request return"}
                   </Button>

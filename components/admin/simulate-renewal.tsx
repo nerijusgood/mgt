@@ -29,8 +29,13 @@ export function SimulateRenewal({ userId, monthlyPoints }: { userId: string; mon
   }
 
   return (
-    <div className="flex gap-2">
-      <Input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} className="max-w-40" />
+    <div className="flex flex-wrap items-end gap-2">
+      <div className="max-w-40">
+        <label htmlFor={`renewal-${userId}`} className="mb-1 block text-xs uppercase tracking-wide text-muted-foreground">
+          Points
+        </label>
+        <Input id={`renewal-${userId}`} type="number" value={amount} onChange={(e) => setAmount(e.target.value)} />
+      </div>
       <Button onClick={run} disabled={pending}>
         {pending ? "Running..." : "Simulate renewal"}
       </Button>
