@@ -20,6 +20,7 @@ pnpm-debug.log*
 .env.development.local
 .env.test.local
 .env.production.local
+.env.development.cloud.local
 
 # system
 .DS_Store
