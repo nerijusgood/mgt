@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { DM_Sans, Poppins } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/marketing/site-header";
+import { SiteFooter } from "@/components/marketing/site-footer";
 import { AppToaster } from "@/components/ui/toaster";
 
 const headingFont = Poppins({
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <SiteHeader />
         <main>{children}</main>
+        <SiteFooter />
         <AppToaster />
       </body>
     </html>

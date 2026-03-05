@@ -16,7 +16,7 @@ export default async function PublicToysPage({
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
           <h1>Browse toys</h1>
-          <p className="mt-2 text-sm text-muted-foreground">Explore age-appropriate toys currently in rotation.</p>
+          <p className="mt-2 text-sm text-muted-foreground">Explore toys matched to your child’s development.</p>
         </div>
         <AgeFilter value={selectedAge} />
       </div>

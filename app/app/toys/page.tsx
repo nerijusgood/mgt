@@ -14,7 +14,7 @@ export default async function ParentToysPage({ searchParams }: { searchParams: P
     <div className="section-stack">
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
-          <h3>Reserve toys</h3>
+          <h3>Explore toys matched to your child’s development</h3>
           <p className="mt-2 text-sm text-muted-foreground">Available points: {pointsBalance}</p>
         </div>
         <AgeFilter value={selectedAge} />
