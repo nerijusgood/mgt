@@ -7,12 +7,16 @@ const DEMO_COOKIE_NAME = "mg_demo_access";
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const search = request.nextUrl.search;
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-pathname", pathname);
   const isSystemPath =
     pathname.startsWith("/_next") ||
     pathname.startsWith("/favicon.ico") ||
     pathname.startsWith("/robots.txt") ||
     pathname.startsWith("/sitemap.xml");
-  const isDemoGateBypass = pathname === "/demo-login" || pathname.startsWith("/api/demo-access");
+  const isPublicLanding = pathname === "/" || pathname.startsWith("/api/waitlist");
+  const isDemoGateBypass =
+    isPublicLanding || pathname === "/demo-login" || pathname.startsWith("/api/demo-access");
   const demoPassword = process.env.DEMO_ACCESS_PASSWORD;
 
   if (!isSystemPath && !isDemoGateBypass && demoPassword) {
@@ -28,10 +32,18 @@ export async function middleware(request: NextRequest) {
   const isAdminRoute = pathname.startsWith("/admin");
 
   if (!isAppRoute && !isAdminRoute) {
-    return NextResponse.next({ request });
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders
+      }
+    });
   }
 
-  let response = NextResponse.next({ request });
+  let response = NextResponse.next({
+    request: {
+      headers: requestHeaders
+    }
+  });
   const env = getPublicSupabaseEnv();
   const supabase = createServerClient(env.supabaseUrl, env.supabaseAnonKey, {
     cookies: {
@@ -40,7 +52,11 @@ export async function middleware(request: NextRequest) {
       },
       setAll(cookiesToSet: Array<{ name: string; value: string; options?: Record<string, unknown> }>) {
         cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
-        response = NextResponse.next({ request });
+        response = NextResponse.next({
+          request: {
+            headers: requestHeaders
+          }
+        });
         cookiesToSet.forEach(({ name, value, options }) => response.cookies.set(name, value, options));
       }
     }
