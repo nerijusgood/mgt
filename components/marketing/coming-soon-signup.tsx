@@ -43,22 +43,25 @@ export function ComingSoonSignup() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="surface space-y-4 p-6 md:p-7" aria-label="Coming soon waitlist signup">
+    <form onSubmit={onSubmit} className="space-y-3" aria-label="Coming soon waitlist signup">
       <div className="space-y-2">
-        <Label htmlFor="waitlist-email">Work email</Label>
-        <Input
-          id="waitlist-email"
-          type="email"
-          autoComplete="email"
-          placeholder="name@institution.dk"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          required
-        />
+        <Label htmlFor="waitlist-email">Join the waitlist</Label>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <Input
+            id="waitlist-email"
+            type="email"
+            autoComplete="email"
+            placeholder="name@institution.dk"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            required
+            className="bg-background sm:flex-1"
+          />
+          <Button type="submit" className="sm:min-w-44" disabled={pending}>
+            {pending ? "Joining..." : "Join the waitlist"}
+          </Button>
+        </div>
       </div>
-      <Button type="submit" className="w-full" disabled={pending}>
-        {pending ? "Joining..." : "Join the waitlist"}
-      </Button>
       <p className="text-xs text-muted-foreground">
         We will use EmailOctopus to send launch updates and early-access invites.
       </p>
