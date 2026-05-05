@@ -20,7 +20,7 @@ export function ComingSoonSignup() {
       const response = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email: email.trim() })
       });
 
       const payload = (await response.json()) as { message?: string; error?: string };
@@ -59,6 +59,7 @@ export function ComingSoonSignup() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
+        maxLength={254}
       />
       <Button type="submit" className="w-full" disabled={pending}>
         {pending ? "joining..." : "notify me"}
