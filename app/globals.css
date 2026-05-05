@@ -124,6 +124,15 @@ main {
   color: var(--mgt-text-secondary);
 }
 
+/* Sonner toast overrides */
+.toast-error {
+  border-left: 3px solid #b94d4d !important;
+}
+
+.toast-success {
+  border-left: 3px solid #6b8f74 !important;
+}
+
 .eyebrow {
   font-family: "Circular Std", system-ui, sans-serif;
   font-weight: 600;

@@ -39,9 +39,10 @@ export default function HomePage() {
         </div>
 
         {/* Footer */}
-        <p style={{ color: "var(--mgt-text-subtle)", fontSize: "12px" }}>
-          © 2025 Mother Goose Toys
-        </p>
+        <div style={{ color: "var(--mgt-text-subtle)", fontSize: "12px", letterSpacing: "-0.01em", lineHeight: "1.6" }}>
+          <p>© {new Date().getFullYear()} Mother Goose Toys. All rights reserved.</p>
+          <p>Made for families in Denmark.</p>
+        </div>
       </div>
 
       {/* Right panel — image */}

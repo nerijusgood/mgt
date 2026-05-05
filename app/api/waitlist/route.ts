@@ -3,7 +3,8 @@ import { z } from "zod";
 
 const waitlistSchema = z.object({
   // RFC 5321 max email length is 254 chars; trim and lowercase for normalization
-  email: z.string().trim().toLowerCase().max(254).email()
+  email: z.string().trim().toLowerCase().max(254).email(),
+  segment: z.enum(["parent", "daycare", "institution"]).optional()
 });
 
 // Simple in-memory rate limiter: max 3 attempts per IP per 15 minutes.
@@ -54,7 +55,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Waitlist is not available right now." }, { status: 500 });
   }
 
-  let body: { email: string };
+  let body: { email: string; segment?: string };
   try {
     const raw = await request.json();
     body = waitlistSchema.parse(raw);
@@ -72,7 +73,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         api_key: apiKey,
         email_address: body.email,
-        tags: ["coming-soon", "website"]
+        tags: ["coming-soon", "website", ...(body.segment ? [body.segment] : [])]
       }),
       cache: "no-store"
     });
