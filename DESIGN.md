@@ -1,3 +1,116 @@
+---
+name: Mother Goose Toys Design System
+colors:
+  surface: '#fdf8f8'
+  surface-dim: '#ddd9d8'
+  surface-bright: '#fdf8f8'
+  surface-container-lowest: '#ffffff'
+  surface-container-low: '#f7f3f2'
+  surface-container: '#f1edec'
+  surface-container-high: '#ebe7e7'
+  surface-container-highest: '#e5e2e1'
+  on-surface: '#1c1b1b'
+  on-surface-variant: '#444748'
+  inverse-surface: '#313030'
+  inverse-on-surface: '#f4f0ef'
+  outline: '#747878'
+  outline-variant: '#c4c7c7'
+  surface-tint: '#5f5e5e'
+  primary: '#222323'
+  on-primary: '#ffffff'
+  primary-container: '#383838'
+  on-primary-container: '#a2a1a1'
+  inverse-primary: '#c8c6c6'
+  secondary: '#5e5e5e'
+  on-secondary: '#ffffff'
+  secondary-container: '#e4e2e2'
+  on-secondary-container: '#646464'
+  tertiary: '#242221'
+  on-tertiary: '#ffffff'
+  tertiary-container: '#3a3736'
+  on-tertiary-container: '#a5a09e'
+  error: '#ba1a1a'
+  on-error: '#ffffff'
+  error-container: '#ffdad6'
+  on-error-container: '#93000a'
+  primary-fixed: '#e4e2e1'
+  primary-fixed-dim: '#c8c6c6'
+  on-primary-fixed: '#1b1c1c'
+  on-primary-fixed-variant: '#474747'
+  secondary-fixed: '#e4e2e2'
+  secondary-fixed-dim: '#c8c6c6'
+  on-secondary-fixed: '#1b1c1c'
+  on-secondary-fixed-variant: '#474747'
+  tertiary-fixed: '#e8e1df'
+  tertiary-fixed-dim: '#cbc5c3'
+  on-tertiary-fixed: '#1d1b1a'
+  on-tertiary-fixed-variant: '#494645'
+  background: '#fdf8f8'
+  on-background: '#1c1b1b'
+  surface-variant: '#e5e2e1'
+  page-bg: '#DAD9D7'
+  text-subtle: '#9FA8AD'
+  pure-black: '#000000'
+  pure-white: '#FFFFFF'
+  divider: '#C6C5C3'
+  image-veil: '#EDECEA'
+typography:
+  wordmark:
+    fontFamily: Manrope
+    fontSize: 30px
+    fontWeight: '700'
+    lineHeight: 28px
+    letterSpacing: -0.04em
+  hero-headline:
+    fontFamily: Manrope
+    fontSize: 96px
+    fontWeight: '800'
+    lineHeight: '0.92'
+    letterSpacing: -0.07em
+  nav-link:
+    fontFamily: Manrope
+    fontSize: 16px
+    fontWeight: '700'
+    lineHeight: 22px
+    letterSpacing: -0.02em
+  eyebrow:
+    fontFamily: Manrope
+    fontSize: 12px
+    fontWeight: '600'
+    lineHeight: 16px
+    letterSpacing: -0.01em
+  body:
+    fontFamily: Manrope
+    fontSize: 14px
+    fontWeight: '400'
+    lineHeight: 20px
+    letterSpacing: -0.01em
+  form-label:
+    fontFamily: Manrope
+    fontSize: 15px
+    fontWeight: '600'
+    lineHeight: 20px
+    letterSpacing: -0.02em
+  cta-label:
+    fontFamily: Manrope
+    fontSize: 15px
+    fontWeight: '700'
+    lineHeight: 20px
+    letterSpacing: -0.01em
+  vertical-label:
+    fontFamily: Manrope
+    fontSize: 14px
+    fontWeight: '700'
+    lineHeight: 16px
+    letterSpacing: -0.02em
+spacing:
+  rail-width: 70px
+  hero-x: 129px
+  hero-y: 192px
+  section-gap: 64px
+  item-gap: 24px
+---
+
 # Design System: Mother Goose Toys Landing Page
 
 **Source:** Uploaded desktop landing-page screenshot  
@@ -11,7 +124,7 @@
 
 The interface is a restrained, editorial landing page with a soft Scandinavian product-service aesthetic. It uses a muted warm-gray canvas, oversized typographic hierarchy, sparse navigation, and one large lifestyle photograph as the emotional anchor.
 
-The mood is calm, deliberate, premium, and lightly brutalist. The design avoids decorative children’s branding, bright toy-store colors, and excessive softness. Instead, it communicates seriousness, sustainability, and trust through neutral color, large scale, strict alignment, and minimal interaction surfaces.
+The mood is calm, deliberate, premium, and lightly brutalist. The design avoids decorative children's branding, bright toy-store colors, and excessive softness. Instead, it communicates seriousness, sustainability, and trust through neutral color, large scale, strict alignment, and minimal interaction surfaces.
 
 Key visual qualities:
 
@@ -35,7 +148,7 @@ Key visual qualities:
 | `--color-page` | Warm Concrete Gray | `#DAD9D7` | Main page background, dominant surface color |
 | `--color-text-primary` | Charcoal Graphite | `#383838` | Main hero headline, primary text, button background |
 | `--color-text-secondary` | Muted Slate Gray | `#505050` | Body copy and secondary explanatory text |
-| `--color-text-subtle` | Soft Blue Gray | `#9FA8AD` | Quiet labels such as “Family size” |
+| `--color-text-subtle` | Soft Blue Gray | `#9FA8AD` | Quiet labels such as "Family size" |
 | `--color-black` | Pure Black | `#000000` | Navigation labels, icon strokes, side links |
 | `--color-white` | Clean White | `#FFFFFF` | Button label text, sidebar/social rail background |
 | `--color-divider` | Pale Concrete Line | `#C6C5C3` | Horizontal divider below form controls |
@@ -385,7 +498,7 @@ The language is short, direct, and benefit-led. It should feel modern and seriou
 - Eyebrow: `Sustainable practice for family future. Designed with childcare experts`
 - Hero: `Better toys. Less clutter.`
 - Intro question: `Why parents choose us?`
-- Body: `Curated, safe, and sustainable toy boxes delivered to your home. Designed for your child’s development — without the waste.`
+- Body: `Curated, safe, and sustainable toy boxes delivered to your home. Designed for your child's development — without the waste.`
 - Label: `Family size`
 - Options: `one child`, `multiple children`
 - CTA: `see plans`
@@ -397,7 +510,7 @@ The language is short, direct, and benefit-led. It should feel modern and seriou
 - Avoid marketing exaggeration.
 - Avoid exclamation marks.
 - Keep labels lowercase where already established.
-- Use “sustainable,” “safe,” “development,” “learning,” “cleaning,” and “less clutter” as recurring concepts.
+- Use "sustainable," "safe," "development," "learning," "cleaning," and "less clutter" as recurring concepts.
 
 ---
 
