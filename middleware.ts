@@ -13,7 +13,9 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith("/_next") ||
     pathname.startsWith("/favicon.ico") ||
     pathname.startsWith("/robots.txt") ||
-    pathname.startsWith("/sitemap.xml");
+    pathname.startsWith("/sitemap.xml") ||
+    pathname.startsWith("/fonts/") ||
+    pathname.startsWith("/images/");
   const isPublicLanding = pathname === "/" || pathname.startsWith("/api/waitlist");
   const isDemoGateBypass =
     isPublicLanding || pathname === "/demo-login" || pathname.startsWith("/api/demo-access");

@@ -1,80 +1,147 @@
+@font-face {
+  font-family: "Circular Std";
+  src: url("/fonts/Circular-Std-Book.woff2") format("woff2"),
+       url("/fonts/Circular-Std-Book.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Circular Std";
+  src: url("/fonts/circular-std-medium-500.woff2") format("woff2"),
+       url("/fonts/circular-std-medium-500.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Circular Std";
+  src: url("/fonts/Circular-Std-Bold.woff2") format("woff2"),
+       url("/fonts/Circular-Std-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Circular Std";
+  src: url("/fonts/Circular-Std-Black.woff2") format("woff2"),
+       url("/fonts/Circular-Std-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --primary: #8faf9a;
-  --secondary: #eadccb;
-  --info: #7fa7c6;
-  --accent: #d98c6a;
+  --mgt-page: #dad9d7;
+  --mgt-surface: #cecdcb;
+  --mgt-text-primary: #383838;
+  --mgt-text-secondary: #505050;
+  --mgt-text-subtle: #9fa8ad;
+  --mgt-black: #000000;
+  --mgt-white: #ffffff;
+  --mgt-divider: #c6c5c3;
 
-  --bg: #f8f6f2;
-  --text: #2e2e2e;
-  --muted: #6b6b6b;
-
-  --background: var(--bg);
-  --foreground: var(--text);
-  --card: #fdfcf9;
-  --card-foreground: var(--text);
-  --popover: #fdfcf9;
-  --popover-foreground: var(--text);
-  --primary-foreground: #1f3126;
-  --secondary-foreground: #43382b;
-  --accent-foreground: #ffffff;
-  --muted-foreground: #585858;
-  --border: #dfd8cd;
-  --input: #dfd8cd;
-  --ring: #7fa7c6;
-  --destructive: #b94d4d;
+  /* Tailwind token mappings */
+  --background: var(--mgt-page);
+  --foreground: var(--mgt-text-primary);
+  --card: #d4d3d1;
+  --card-foreground: var(--mgt-text-primary);
+  --popover: #d4d3d1;
+  --popover-foreground: var(--mgt-text-primary);
+  --primary: var(--mgt-text-primary);
+  --primary-foreground: var(--mgt-white);
+  --secondary: #c8c7c5;
+  --secondary-foreground: var(--mgt-text-secondary);
+  --muted: #c8c7c5;
+  --muted-foreground: var(--mgt-text-subtle);
+  --accent: #c8c7c5;
+  --accent-foreground: var(--mgt-text-primary);
+  --border: var(--mgt-divider);
+  --input: var(--mgt-divider);
+  --ring: var(--mgt-text-primary);
+  --destructive: #ba1a1a;
   --destructive-foreground: #ffffff;
-
-  --radius: 1rem;
+  --radius: 0px;
 }
 
 * {
-  @apply border-border;
-}
-
-* :focus-visible {
-  @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  box-sizing: border-box;
 }
 
 body {
-  @apply bg-background text-foreground antialiased;
-  font-family: var(--font-body), sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
+  background-color: var(--mgt-page);
+  color: var(--mgt-text-primary);
+  font-family: "Circular Std", "Avenir Next", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-heading), sans-serif;
-  letter-spacing: -0.01em;
+  font-family: "Circular Std", "Avenir Next", system-ui, sans-serif;
+  letter-spacing: -0.04em;
+  color: var(--mgt-text-primary);
 }
 
 h1 {
-  @apply text-4xl font-semibold md:text-5xl;
+  font-size: clamp(52px, 7vw, 96px);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.07em;
 }
 
 h2 {
-  @apply text-3xl font-semibold;
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.05em;
 }
 
 h3 {
-  @apply text-2xl font-semibold;
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 700;
+  line-height: 1.1;
 }
 
 main {
-  @apply mx-auto w-full max-w-[72rem] px-4 pb-16 pt-8 md:px-6 md:pt-10;
+  width: 100%;
 }
 
-.section-stack {
-  @apply space-y-8 md:space-y-10;
+.wordmark {
+  font-family: "Circular Std", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+  color: var(--mgt-text-secondary);
 }
 
-.surface {
-  @apply rounded-2xl border border-border bg-card shadow-sm;
-  box-shadow: 0 8px 24px rgba(46, 46, 46, 0.05);
+/* Sonner toast overrides */
+.toast-error {
+  border-left: 3px solid #b94d4d !important;
+}
+
+.toast-success {
+  border-left: 3px solid #6b8f74 !important;
+}
+
+.eyebrow {
+  font-family: "Circular Std", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.01em;
+  color: var(--mgt-text-subtle);
 }
