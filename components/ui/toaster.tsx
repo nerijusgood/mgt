@@ -23,10 +23,12 @@ export function AppToaster() {
       position="top-right"
       offset={20}
       gap={8}
-      toastOptions={{ style: toastStyle }}
-      classNames={{
-        error: "toast-error",
-        success: "toast-success"
+      toastOptions={{
+        style: toastStyle,
+        classNames: {
+          error: "toast-error",
+          success: "toast-success"
+        }
       }}
     />
   );
