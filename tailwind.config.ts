@@ -9,13 +9,16 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['"Circular Std"', '"Avenir Next"', "system-ui", "sans-serif"]
+      },
       colors: {
         border: "var(--border)",
         input: "var(--input)",
         ring: "var(--ring)",
         background: "var(--background)",
         foreground: "var(--foreground)",
-        info: "var(--info)",
+        page: "var(--mgt-page)",
         primary: {
           DEFAULT: "var(--primary)",
           foreground: "var(--primary-foreground)"
@@ -25,7 +28,7 @@ const config: Config = {
           foreground: "var(--secondary-foreground)"
         },
         muted: {
-          DEFAULT: "#efebe4",
+          DEFAULT: "var(--muted)",
           foreground: "var(--muted-foreground)"
         },
         accent: {
@@ -46,15 +49,22 @@ const config: Config = {
         }
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 4px)",
-        sm: "calc(var(--radius) - 8px)"
+        none: "0px",
+        sm: "0px",
+        DEFAULT: "0px",
+        md: "0px",
+        lg: "0px",
+        xl: "0px",
+        "2xl": "0px",
+        "3xl": "0px",
+        full: "9999px"
       },
-      transitionTimingFunction: {
-        soft: "cubic-bezier(0.2, 0, 0, 1)"
+      fontSize: {
+        hero: ["clamp(52px,7vw,96px)", { lineHeight: "0.92", letterSpacing: "-0.07em" }]
       },
-      transitionDuration: {
-        soft: "180ms"
+      letterSpacing: {
+        tight: "-0.04em",
+        tighter: "-0.07em"
       }
     }
   },
