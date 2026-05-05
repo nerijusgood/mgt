@@ -63,7 +63,7 @@ export function ComingSoonSignup() {
       {/* Audience selector */}
       <div className="flex flex-col gap-2">
         <p style={{ color: "var(--mgt-text-subtle)", fontSize: "12px", fontWeight: 600, letterSpacing: "-0.01em" }}>
-          i am a...
+          I am a...
         </p>
         <div className="flex gap-5">
           {audiences.map(({ value, label }) => (
@@ -120,10 +120,10 @@ export function ComingSoonSignup() {
         maxLength={254}
       />
       <Button type="submit" className="w-full" disabled={pending}>
-        {pending ? "joining..." : "notify me"}
+        {pending ? "Joining..." : "Notify me"}
       </Button>
       <p style={{ color: "var(--mgt-text-subtle)", fontSize: "11px", letterSpacing: "-0.01em" }}>
-        no spam. launch updates only.
+        No spam. Launch updates only.
       </p>
     </form>
   );
